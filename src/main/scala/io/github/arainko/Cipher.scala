@@ -26,7 +26,7 @@ object Cipher {
         .getInt()
     }
 
-  def ebc(path: String): ZIO[Blocking, Throwable, Boolean] =
+  def ecb(path: String): ZIO[Blocking, Throwable, Boolean] =
     ZStream
       .fromFile(Paths.get(path))
       .toInputStream
@@ -34,7 +34,7 @@ object Cipher {
       .use { img =>
         ZIO.effect {
           mutateImageWithKey(img)
-        } *> effectBlockingIO(ImageIO.write(img.image, "bmp", new File("files/ebc_crypto.bmp")))
+        } *> effectBlockingIO(ImageIO.write(img.image, "bmp", new File("files/ecb_crypto.bmp")))
       }
 
   def cbc(path: String): ZIO[Blocking, Throwable, Boolean] =

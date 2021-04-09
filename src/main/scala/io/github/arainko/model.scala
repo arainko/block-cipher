@@ -3,29 +3,8 @@ package io.github.arainko
 import io.github.arainko.syntax._
 
 import java.awt.image.BufferedImage
-import java.awt.{Color => JColor}
 
 object model {
-
-  final case class OffsetX(value: Int) extends AnyVal
-  final case class OffsetY(value: Int) extends AnyVal
-
-  object Color {
-
-    def fromARGB(argb: Int): Color = {
-      val red   = (argb << 8) >>> 24
-      val green = (argb << 16) >>> 24
-      val blue  = (argb << 24) >>> 24
-      Color(red, green, blue)
-    }
-
-    def fromJavaColor(color: JColor): Color = fromARGB(color.getRGB)
-
-  }
-
-  final case class Color(red: Int, green: Int, blue: Int) {
-    def toJavaColor: JColor = new JColor(red, green, blue)
-  }
 
   final case class Image(image: BufferedImage) extends AnyVal {
     def width: Int  = image.getWidth
